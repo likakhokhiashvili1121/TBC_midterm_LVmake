@@ -3,7 +3,7 @@
     package="com.example.tbc_midterm_lvmake">
 
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 
     <application
         android:allowBackup="true"
