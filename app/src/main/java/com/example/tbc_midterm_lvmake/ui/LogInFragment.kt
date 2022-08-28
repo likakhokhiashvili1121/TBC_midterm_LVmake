@@ -1,60 +1,103 @@
 package com.example.tbc_midterm_lvmake.ui
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.tbc_midterm_lvmake.BaseFragment
 import com.example.tbc_midterm_lvmake.R
+import com.example.tbc_midterm_lvmake.databinding.FragmentLogInBinding
+import com.example.tbc_midterm_lvmake.viewmodel.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class LoginFragment : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LogInFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class LogInFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentLogInBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log_in, container, false)
+        _binding = FragmentLogInBinding.inflate(layoutInflater, container, false)
+        val view = binding.root
+
+        mAuth = FirebaseAuth.getInstance()
+
+
+
+        val viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+
+
+        binding.loginBtn.setOnClickListener {
+            val email = binding.emailET.text.toString()
+            val password = binding.passwordET.text.toString()
+
+            if (email.isEmpty()) {
+                binding.emailET.error = "Unesite email!"
+                binding.emailET.requestFocus()
+                return@setOnClickListener
+            }
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.emailET.error = "Unesite validan email!"
+                binding.emailET.requestFocus()
+                return@setOnClickListener
+            }
+            if (password.isEmpty()) {
+                binding.passwordET.error = "Unesite password!"
+                binding.passwordET.requestFocus()
+                return@setOnClickListener
+            }
+            if (password.length < 6) {
+                binding.passwordET.error = "Unesite password duzi od 6!"
+                binding.passwordET.requestFocus()
+                return@setOnClickListener
+            }
+
+            binding.progressBar.visibility = View.VISIBLE
+
+            viewModel.email = email
+            viewModel.password = password
+
+            viewModel.userLogin(mAuth)
+        }
+
+        viewModel.isAbleToLogin.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                findNavController().navigate(R.id.action_loginFragment_to_HomeFragment)
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        })
+
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            Snackbar.make(view, it, Snackbar.LENGTH_SHORT).setBackgroundTint(Color.RED).show()
+        })
+
+        viewModel.emailVerified.observe(viewLifecycleOwner, Observer {
+            if (!it){
+                Snackbar.make(view, "Molimo verifikujte vas racun!", Snackbar.LENGTH_LONG).setBackgroundTint(Color.RED).show()
+                binding.progressBar.visibility = View.GONE
+            }
+        })
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LogInFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LogInFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
 }

@@ -1,60 +1,105 @@
 package com.example.tbc_midterm_lvmake.ui
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.tbc_midterm_lvmake.R
+import com.example.tbc_midterm_lvmake.databinding.FragmentRegisterBinding
+import com.example.tbc_midterm_lvmake.viewmodel.RegisterViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_welcome.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RegisterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegisterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        _binding = FragmentRegisterBinding.inflate(layoutInflater, container, false)
+        val view = binding.root
+
+        mAuth = FirebaseAuth.getInstance()
+
+        val viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+
+        binding.RegisterBtn.setOnClickListener {
+            val email = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            val userName = binding.userEditText.text.toString()
+
+
+            if (userName.isEmpty()) {
+                binding.userEditText.error = "Puno ime je obavezno!"
+                binding.userEditText.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (email.isEmpty()) {
+                binding.emailEditText.error = "Email je obavezan!"
+                binding.emailEditText.requestFocus()
+                return@setOnClickListener
+            }
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.emailEditText.error = "Molimo unesite vazeci email!"
+                binding.emailEditText.requestFocus()
+                return@setOnClickListener
+            }
+            if (password.isEmpty()) {
+                binding.passwordEditText.error = "Password je obavezan!"
+                binding.passwordEditText.requestFocus()
+                return@setOnClickListener
+            }
+            if (password.length < 6) {
+                binding.passwordEditText.error = "Password mora biti duzi od 6!"
+                binding.passwordEditText.requestFocus()
+                return@setOnClickListener
+            }
+
+            binding.progressBar.visibility = View.VISIBLE
+
+            viewModel.email = email
+            viewModel.password = password
+            viewModel.fullName = userName
+
+            viewModel.register(mAuth)
+
+        }
+
+        viewModel.isRegistered.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                Snackbar.make(view,"Uspjesno registrovan korisnik", Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(Color.GREEN).show()
+                binding.progressBar.visibility = View.GONE
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        })
+
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            Snackbar.make(view,it, Snackbar.LENGTH_SHORT).setBackgroundTint(Color.RED).show()
+        })
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegisterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RegisterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
 }
