@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
+import com.example.tbc_midterm_lvmake.ui.WelcomeFragment
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -13,10 +14,10 @@ class SplashScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.activity_main)
 
         supportActionBar?.hide()
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, WelcomeFragment::class.java)
         val hiAnimation: LottieAnimationView = findViewById(R.id.hi)
         val heartAnimation: LottieAnimationView = findViewById(R.id.heart)
         val meditationAnimation: LottieAnimationView = findViewById(R.id.meditation)
