@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -71,17 +72,14 @@ dependencies {
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
-//Room DB for database
+    //Room DB for database
     implementation "androidx.room:room-runtime:2.3.0"
- //   kapt "androidx.room:room-compiler:2.3.0"
-
-    //  kapt("androidx.lifecycle:lifecycle-compiler:2.4.0-rc01")
-    // kapt "androidx.lifecycle:lifecycle-compiler:2.3.1"
+    
     implementation "android.arch.lifecycle:common-java8:1.1.1"
 
     //coroutines and retrofit coroutines adapter
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
-    //implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:1.5.0"
+
     implementation 'com.airbnb.android:lottie:4.0.0'
 }

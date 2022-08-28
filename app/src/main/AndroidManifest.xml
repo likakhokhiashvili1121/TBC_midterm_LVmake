@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tbc_midterm_lvmake">
 
-
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -12,8 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TBC_midterm_LVmake">
-        <activity
-            android:name=".MainActivity"
+
+        <activity android:name=".ui.categories.Products_Activity"
+            android:exported="true"/>
+
+        <activity android:name=".MainActivity"
+            android:exported="true"/>
+
+        <activity android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
