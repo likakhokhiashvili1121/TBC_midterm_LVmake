@@ -5,7 +5,7 @@ VLmake is a sample Android project using API based on MVVM architecture. It help
 
 ## Used By
 
-This project is used by the following companies:
+This project is used by the following :
 
 - people who are interested in makeup
 
