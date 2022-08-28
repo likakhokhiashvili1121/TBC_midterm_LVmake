@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/georama_semicondensed_semibolditalic"
-                    android:text="Makeup"
+                    android:text="VL"
                     android:textSize="32sp" />
 
                 <TextView
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/georama_semicondensed_semibolditalic"
-                    android:text="Club"
+                    android:text="MAKE"
                     android:textColor="@color/pink_500"
                     android:textSize="32sp" />
 

@@ -1,25 +1,17 @@
-package com.deepshikhayadav.makeupclub.adapter
+package com.example.tbc_midterm_lvmake.adapter
 
-import android.content.Intent
-import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.deepshikhayadav.makeupclub.R
-import com.deepshikhayadav.makeupclub.adapter.BrandAdapter.MyViewHolder
-import com.deepshikhayadav.makeupclub.model.BrandModel
-import com.deepshikhayadav.makeupclub.model.MyResponse
-import com.deepshikhayadav.makeupclub.ui.home.HomeFragment
+import com.example.tbc_midterm_lvmake.R
+import com.example.tbc_midterm_lvmake.adapter.BrandAdapter.MyViewHolder
+import com.example.tbc_midterm_lvmake.model.BrandModel
 import kotlinx.android.synthetic.main.hor_rec_resource.view.*
+
 
 class BrandAdapter(private val res: List<BrandModel>) : RecyclerView.Adapter<MyViewHolder>() {
 

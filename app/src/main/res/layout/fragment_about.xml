@@ -68,7 +68,7 @@
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="Deepshikha yadav"
+                   android:text="@string/lika_and_vato"
                    android:textStyle="bold"
                    android:layout_marginStart="8dp"
                    android:layout_marginTop="8dp"
@@ -77,7 +77,7 @@
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="Android Developer"
+                   android:text="Android Developers"
                    android:layout_marginStart="10dp"
                    android:textSize="15sp"/>
 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "28626396039",
+    "project_id": "midtermllvmake",
+    "storage_bucket": "midtermllvmake.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28626396039:android:3a0eb2f88eb839e0842922",
+        "android_client_info": {
+          "package_name": "com.example.tbc_midterm_lvmake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28626396039-ipmoa1akummnf0sp7478j8l10a38eiqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7HMYFNKNo4gPrriiUceFsH4Gcs_YU7qg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28626396039-ipmoa1akummnf0sp7478j8l10a38eiqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+

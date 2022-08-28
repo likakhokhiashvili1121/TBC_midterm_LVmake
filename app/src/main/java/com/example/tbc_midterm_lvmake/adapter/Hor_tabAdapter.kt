@@ -1,22 +1,15 @@
-package com.deepshikhayadav.makeupclub.adapter
+package com.example.tbc_midterm_lvmake.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.deepshikhayadav.makeupclub.R
-import com.deepshikhayadav.makeupclub.model.BrandModel
-import com.deepshikhayadav.makeupclub.ui.dashboard.DashboardViewModel
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.hor_rec_resource.view.*
-import kotlinx.android.synthetic.main.hor_rec_resource.view.name
+import com.example.tbc_midterm_lvmake.R
+import com.example.tbc_midterm_lvmake.model.BrandModel
+import com.example.tbc_midterm_lvmake.ui.dashboard.DashboardViewModel
 import kotlinx.android.synthetic.main.hor_tablayout.view.*
 
-class Hor_tabAdapter (val viewModel:DashboardViewModel, private val res: List<BrandModel>) : RecyclerView.Adapter<Hor_tabAdapter.MyViewHolder>() {
+class Hor_tabAdapter (val viewModel: DashboardViewModel, private val res: List<BrandModel>) : RecyclerView.Adapter<Hor_tabAdapter.MyViewHolder>() {
 private val myConst:Int=1
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(brandModel: BrandModel){
@@ -26,7 +19,7 @@ private val myConst:Int=1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.hor_tablayout,parent,false)
-        val viewHolder=MyViewHolder(view)
+        val viewHolder= MyViewHolder(view)
 
         view.setOnClickListener{
 

@@ -1,15 +1,16 @@
-package com.deepshikhayadav.makeupclub.adapter
+package com.example.tbc_midterm_lvmake.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.deepshikhayadav.makeupclub.R
-import com.deepshikhayadav.makeupclub.databinding.SliderHorizonBinding
-import com.deepshikhayadav.makeupclub.model.MyResponse
-import com.deepshikhayadav.makeupclub.ui.dashboard.DashboardViewModel
+import com.example.tbc_midterm_lvmake.R
+import com.example.tbc_midterm_lvmake.databinding.SliderHorizonBinding
+import com.example.tbc_midterm_lvmake.model.MyResponse
+import kotlinx.android.synthetic.main.fragment_home.view.productName
 import kotlinx.android.synthetic.main.slider_horizon.view.*
+
 
 class CategoryAdapter(private val res: List<MyResponse>) : RecyclerView.Adapter<CategoryAdapter.myViewHolder>() {
 
